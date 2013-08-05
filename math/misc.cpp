@@ -13,8 +13,8 @@ namespace yks {
 			return 1;
 		} else {
 			const float sqrt_delta = std::sqrt(delta);
-			x1 = (-b + sqrt_delta) / (2*a);
-			x2 = (-b - sqrt_delta) / (2*a);
+			x1 = (-b - sqrt_delta) / (2*a);
+			x2 = (-b + sqrt_delta) / (2*a);
 			return 2;
 		}
 	}

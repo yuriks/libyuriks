@@ -4,14 +4,5 @@
 #include "Optional.hpp"
 
 namespace yks {
-	struct Sphere {
-		vec3 origin;
-		float radius;
-
-		Sphere(vec3 origin, float radius)
-			: origin(origin), radius(radius)
-		{}
-	};
-
-	Optional<float> intersect(const Sphere& sphere, const Ray r);
+	Optional<float> intersect(const vec3& origin, float radius, const Ray& r);
 }

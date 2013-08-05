@@ -18,22 +18,22 @@ namespace yks {
 
 		TransformPair translate(const vec3& v) const {
 			return TransformPair{
-				parentFromLocal * yks::translate(v),
-				yks::translate(-v) * localFromParent
+				yks::translate(v) * parentFromLocal,
+				localFromParent * yks::translate(-v)
 			};
 		}
 
 		TransformPair scale(float s) const {
 			return TransformPair{
-				parentFromLocal * pad<4>(yks::scale(s)),
-				pad<4>(yks::scale(1.0f / s)) * localFromParent
+				pad<4>(yks::scale(s)) * parentFromLocal,
+				localFromParent * pad<4>(yks::scale(1.0f / s))
 			};
 		}
 
 		TransformPair rotate(const mat3& m) const {
 			return TransformPair{
-				parentFromLocal * pad<4>(m),
-				pad<4>(transpose(m)) * localFromParent
+				pad<4>(m) * parentFromLocal,
+				localFromParent * pad<4>(transpose(m))
 			};
 		}
 	};

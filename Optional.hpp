@@ -45,11 +45,13 @@ public:
 			}
 		} else {
 			if (o.present) {
-				new (get_pointer()) T(o);
+				new (&storage) T(*o.get_pointer());
 			}
 		}
 		present = o.present;
 		update_debug_ptr();
+
+		return *this;
 	}
 
 	template <typename... Args>

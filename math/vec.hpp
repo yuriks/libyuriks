@@ -181,6 +181,16 @@ namespace yks {
 		return rv;
 	}
 
+	template<unsigned int N, typename T>
+	inline vec<N,T> lerp(const vec<N,T> a, const vec<N,T> b, T t) {
+		return (T(1) - t)*a + t*b;
+	}
+
+	template<unsigned int N, typename T>
+	inline vec<N, T> nlerp(const vec<N, T> a, const vec<N, T> b, T t) {
+		return normalized(lerp(a, b, t));
+	}
+
 	// Prints vector v to stream in the format "<x y z>".
 	template<unsigned int N, typename T>
 	std::ostream& operator <<(std::ostream& s, const vec<N,T> v) {

@@ -1,11 +1,13 @@
 #include "SpriteBuffer.hpp"
 
 #include "gl/gl_1_5.h"
+#include "gl/gl_assert.hpp"
+#include <cassert>
 
 namespace yks {
 
 	void VertexData::setupVertexAttribs() {
-		CHECK_GL_ERROR_PARANOID;
+		YKS_CHECK_GL_PARANOID;
 
 		glVertexPointer(2, GL_FLOAT, sizeof(VertexData), reinterpret_cast<void*>(offsetof(VertexData, pos_x)));
 		glEnableClientState(GL_VERTEX_ARRAY);
@@ -14,7 +16,7 @@ namespace yks {
 		glColorPointer(4, GL_UNSIGNED_BYTE, sizeof(VertexData), reinterpret_cast<void*>(offsetof(VertexData, color)));
 		glEnableClientState(GL_COLOR_ARRAY);
 
-		CHECK_GL_ERROR_PARANOID;
+		YKS_CHECK_GL_PARANOID;
 	}
 
 	///////////////////////////////////////////////////////////
@@ -81,18 +83,16 @@ namespace yks {
 
 	///////////////////////////////////////////////////////////
 
-	SpriteBufferIndices::SpriteBufferIndices()
-		: index_count(0)
-	{
-		CHECK_GL_ERROR_PARANOID;
+	SpriteBufferIndices::SpriteBufferIndices() {
+		YKS_CHECK_GL_PARANOID;
 
 		glGenBuffers(1, &ibo.name);
 
-		CHECK_GL_ERROR_PARANOID;
+		YKS_CHECK_GL_PARANOID;
 	}
 
 	void SpriteBufferIndices::update(unsigned int sprite_count) {
-		CHECK_GL_ERROR_PARANOID;
+		YKS_CHECK_GL_PARANOID;
 
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo.name);
 		if (index_count >= sprite_count)
@@ -115,17 +115,15 @@ namespace yks {
 
 		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLushort)*indices.size(), indices.data(), GL_STREAM_DRAW);
 
-		CHECK_GL_ERROR_PARANOID;
+		YKS_CHECK_GL_PARANOID;
 	}
 
-	SpriteBuffer::SpriteBuffer() :
-		sprite_count(0)
-	{
-		CHECK_GL_ERROR_PARANOID;
+	SpriteBuffer::SpriteBuffer() {
+		YKS_CHECK_GL_PARANOID;
 
 		glGenBuffers(1, &vbo.name);
 
-		CHECK_GL_ERROR_PARANOID;
+		YKS_CHECK_GL_PARANOID;
 	}
 
 	void SpriteBuffer::clear() {
@@ -134,10 +132,11 @@ namespace yks {
 	}
 
 	void SpriteBuffer::append(const Sprite& spr) {
-		float img_x = spr.img.x / static_cast<float>(texture->width);
-		float img_w = spr.img.w / static_cast<float>(texture->width);
-		float img_y = spr.img.y / static_cast<float>(texture->height);
-		float img_h = spr.img.h / static_cast<float>(texture->height);
+		assert(texture_size[0] >= 0 && texture_size[1] >= 0);
+		float img_x = spr.img.x / static_cast<float>(texture_size[0]);
+		float img_w = spr.img.w / static_cast<float>(texture_size[0]);
+		float img_y = spr.img.y / static_cast<float>(texture_size[1]);
+		float img_h = spr.img.h / static_cast<float>(texture_size[1]);
 
 		VertexData v;
 		v.color[0] = spr.color.r;
@@ -167,10 +166,11 @@ namespace yks {
 	}
 
 	void SpriteBuffer::append(const Sprite& spr, const SpriteMatrix& matrix) {
-		float img_x = spr.img.x / static_cast<float>(texture->width);
-		float img_w = spr.img.w / static_cast<float>(texture->width);
-		float img_y = spr.img.y / static_cast<float>(texture->height);
-		float img_h = spr.img.h / static_cast<float>(texture->height);
+		assert(texture_size[0] >= 0 && texture_size[1] >= 0);
+		float img_x = spr.img.x / static_cast<float>(texture_size[0]);
+		float img_w = spr.img.w / static_cast<float>(texture_size[0]);
+		float img_y = spr.img.y / static_cast<float>(texture_size[1]);
+		float img_h = spr.img.h / static_cast<float>(texture_size[1]);
 
 		VertexData v;
 		v.color[0] = spr.color.r;
@@ -211,16 +211,15 @@ namespace yks {
 	}
 
 	void SpriteBuffer::draw(SpriteBufferIndices& indices) const {
-		CHECK_GL_ERROR_PARANOID;
+		YKS_CHECK_GL_PARANOID;
 
 		indices.update(sprite_count);
 		glBindBuffer(GL_ARRAY_BUFFER, vbo.name);
 		glBufferData(GL_ARRAY_BUFFER, sizeof(VertexData)*vertices.size(), vertices.data(), GL_STREAM_DRAW);
 		VertexData::setupVertexAttribs();
-		glBindTexture(GL_TEXTURE_2D, texture->handle.name);
 		glDrawElements(GL_TRIANGLES, sprite_count * 6, GL_UNSIGNED_SHORT, nullptr);
 
-		CHECK_GL_ERROR_PARANOID;
+		YKS_CHECK_GL_PARANOID;
 	}
 
 }

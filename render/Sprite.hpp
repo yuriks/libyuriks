@@ -25,12 +25,7 @@ namespace yks {
 	struct Sprite {
 		yks::vec2i pos;
 		IntRect img;
-		Color color;
-
-		Sprite() {
-			const Color white = {255, 255, 255, 255};
-			color = white;
-		}
+		Color color = Color{255, 255, 255, 255};
 
 		void setImg(int x, int y, int w, int h) {
 			img.x = x; img.y = y;

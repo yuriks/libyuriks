@@ -2,7 +2,7 @@
 
 #include "gl/gl_1_5.h"
 #include <vector>
-#include "graphics_init.hpp"
+#include "gl/gl_assert.hpp"
 #include "texture.hpp"
 #include "gl/Buffer.hpp"
 #include "Sprite.hpp"
@@ -36,7 +36,7 @@ namespace yks {
 
 	struct SpriteBufferIndices {
 		std::vector<GLushort> indices;
-		unsigned int index_count;
+		unsigned int index_count = 0;
 
 		gl::Buffer ibo;
 
@@ -47,9 +47,9 @@ namespace yks {
 	struct SpriteBuffer {
 		std::vector<VertexData> vertices;
 
-		unsigned int sprite_count;
+		unsigned int sprite_count = 0;
 		gl::Buffer vbo;
-		std::shared_ptr<TextureInfo> texture;
+		vec2i texture_size = {{-1, -1}};
 
 		SpriteBuffer();
 

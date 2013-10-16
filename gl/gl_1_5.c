@@ -1184,8 +1184,10 @@ static int Load_Version_1_5()
 	if(!_ptrc_glIsList) numFailed++;
 	_ptrc_glFrustum = (void (CODEGEN_FUNCPTR *)(GLdouble , GLdouble , GLdouble , GLdouble , GLdouble , GLdouble ))IntGetProcAddress("glFrustum");
 	if(!_ptrc_glFrustum) numFailed++;
+	*/
 	_ptrc_glLoadIdentity = (void (CODEGEN_FUNCPTR *)())IntGetProcAddress("glLoadIdentity");
 	if(!_ptrc_glLoadIdentity) numFailed++;
+	/*
 	_ptrc_glLoadMatrixf = (void (CODEGEN_FUNCPTR *)(const GLfloat *))IntGetProcAddress("glLoadMatrixf");
 	if(!_ptrc_glLoadMatrixf) numFailed++;
 	_ptrc_glLoadMatrixd = (void (CODEGEN_FUNCPTR *)(const GLdouble *))IntGetProcAddress("glLoadMatrixd");

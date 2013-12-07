@@ -1,6 +1,7 @@
 #include "./Sphere.hpp"
 #include "./misc.hpp"
 #include <algorithm>
+#include <cmath>
 
 namespace yks {
 
@@ -18,6 +19,14 @@ namespace yks {
 		} else {
 			return make_optional<float>(std::min(t1, t2));
 		}
+	}
+
+	vec3 uniform_point_on_sphere(float a, float b) {
+		const float y = 2.0f * a - 1.0f;
+		const float latitude = std::asin(y);
+		const float longitude = b * two_pi;
+
+		return mvec3(cos(latitude) * cos(longitude), y, cos(latitude) * sin(longitude));
 	}
 
 }

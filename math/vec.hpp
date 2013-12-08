@@ -159,10 +159,16 @@ namespace yks {
 		return r;
 	}
 
+	// Computes the square of the euclidean length of vector v.
+	template<unsigned int N, typename T>
+	inline T length_sqr(const vec<N, T> v) {
+		return dot(v, v);
+	}
+
 	// Computes euclidean length of vector v.
 	template<unsigned int N, typename T>
 	inline T length(const vec<N,T> v) {
-		return std::sqrt(dot(v, v));
+		return std::sqrt(length_sqr(v));
 	}
 
 	// Normalizes vector v.

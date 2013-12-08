@@ -29,7 +29,7 @@ namespace yks {
 
 	mat3 orient(const vec3& up, const vec3& forward) {
 		const vec3 z_axis = forward;
-		const vec3 x_axis = cross(z_axis, up);
+		const vec3 x_axis = normalized(cross(z_axis, up));
 		const vec3 y_axis = cross(x_axis, z_axis);
 
 		return mat3{{

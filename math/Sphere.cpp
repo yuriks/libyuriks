@@ -25,8 +25,9 @@ namespace yks {
 		const float y = 2.0f * a - 1.0f;
 		const float latitude = std::asin(y);
 		const float longitude = b * two_pi;
+		const float cos_latitude = std::cos(latitude);
 
-		return mvec3(cos(latitude) * cos(longitude), y, cos(latitude) * sin(longitude));
+		return mvec3(cos_latitude * cos(longitude), y, cos_latitude * sin(longitude));
 	}
 
 }

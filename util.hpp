@@ -97,3 +97,13 @@ inline int decWrap(int value, const int max) {
 	}
 	return value;
 }
+
+template <typename T>
+inline T vmax(const T& a, const T& b) {
+	return a >= b ? a : b;
+}
+
+template <typename T>
+inline T vmin(const T& a, const T& b) {
+	return a < b ? a : b;
+}

@@ -23,11 +23,10 @@ namespace yks {
 
 	vec3 uniform_point_on_sphere(float a, float b) {
 		const float y = 2.0f * a - 1.0f;
-		const float latitude = std::asin(y);
 		const float longitude = b * two_pi;
-		const float cos_latitude = std::cos(latitude);
+		const float cos_latitude = std::sqrt(1.0f - sqr(y));
 
-		return mvec3(cos_latitude * cos(longitude), y, cos_latitude * sin(longitude));
+		return mvec3(cos_latitude * std::cos(longitude), y, cos_latitude * std::sin(longitude));
 	}
 
 }

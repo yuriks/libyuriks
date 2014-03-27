@@ -9,7 +9,7 @@ namespace yks {
 		uint32_t generation;
 
 		Handle()
-			: index(SIZE_MAX), generation(-1)
+			: index(SIZE_MAX), generation(~0u)
 		{}
 
 		Handle(size_t index, uint32_t generation)

@@ -1745,7 +1745,7 @@ static void ParseVersionFromString(int *pOutMajor, int *pOutMinor, const char *s
 
 static void GetGLVersion()
 {
-	ParseVersionFromString(&g_major_version, &g_minor_version, glGetString(GL_VERSION));
+	ParseVersionFromString(&g_major_version, &g_minor_version, (const char*)glGetString(GL_VERSION));
 }
 
 int ogl_GetMinorVersion()

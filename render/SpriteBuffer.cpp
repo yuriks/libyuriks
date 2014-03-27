@@ -100,7 +100,7 @@ namespace yks {
 
 		indices.reserve(sprite_count * 6);
 		for (unsigned int i = index_count; i < sprite_count; ++i) {
-			unsigned short base_i = i * 4;
+			unsigned short base_i = static_cast<unsigned short>(i * 4);
 
 			indices.push_back(base_i + 0);
 			indices.push_back(base_i + 1);

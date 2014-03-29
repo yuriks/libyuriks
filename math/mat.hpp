@@ -79,6 +79,10 @@ namespace yks {
 			}
 			return r;
 		}
+
+		const T* as_row_major() const {
+			return &data[0][0];
+		}
 	};
 
 	template<unsigned int R, unsigned int C, typename T>

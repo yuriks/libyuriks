@@ -4,6 +4,7 @@
 
 inline void check_gl_error() {
 	GLenum error = glGetError();
+	(void) error;
 	assert(error == GL_NO_ERROR);
 }
 

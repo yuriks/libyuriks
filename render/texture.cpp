@@ -5,6 +5,10 @@
 #include <memory>
 #include <cassert>
 
+#ifndef TEXTURE_MAX_ANISOTROPY_EXT
+#define TEXTURE_MAX_ANISOTROPY_EXT 0x84FE
+#endif
+
 namespace yks {
 
 	TextureInfo loadTexture(int width, int height, const uint8_t* data) {
@@ -19,6 +23,7 @@ namespace yks {
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+		glTexParameterf(GL_TEXTURE_2D, TEXTURE_MAX_ANISOTROPY_EXT, 16.0f);
 
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
 

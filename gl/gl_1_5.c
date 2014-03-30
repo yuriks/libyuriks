@@ -602,8 +602,10 @@ static int Load_Version_1_5()
 	if(!_ptrc_glPolygonMode) numFailed++;
 	_ptrc_glScissor = (void (CODEGEN_FUNCPTR *)(GLint , GLint , GLsizei , GLsizei ))IntGetProcAddress("glScissor");
 	if(!_ptrc_glScissor) numFailed++;
+	*/
 	_ptrc_glTexParameterf = (void (CODEGEN_FUNCPTR *)(GLenum , GLenum , GLfloat ))IntGetProcAddress("glTexParameterf");
 	if(!_ptrc_glTexParameterf) numFailed++;
+	/*
 	_ptrc_glTexParameterfv = (void (CODEGEN_FUNCPTR *)(GLenum , GLenum , const GLfloat *))IntGetProcAddress("glTexParameterfv");
 	if(!_ptrc_glTexParameterfv) numFailed++;
 	*/

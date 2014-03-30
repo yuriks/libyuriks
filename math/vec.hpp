@@ -187,9 +187,9 @@ namespace yks {
 		return rv;
 	}
 
-	template<unsigned int N, typename T>
-	inline vec<N,T> lerp(const vec<N,T> a, const vec<N,T> b, T t) {
-		return (T(1) - t)*a + t*b;
+	template <typename T, typename U>
+	inline T lerp(const T& a, const T& b, U t) {
+		return (U(1) - t)*a + t*b;
 	}
 
 	template<unsigned int N, typename T>

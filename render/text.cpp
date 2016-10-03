@@ -9,7 +9,7 @@ namespace yks {
 
 	void drawString(int x, int y, const std::string& text, SpriteBuffer& buffer, const FontInfo& font, const Color& color) {
 		Sprite spr;
-		spr.mat.transform(mvec2(x, y).typecast<float>());
+		spr.mat.translate(mvec2(x, y).typecast<float>());
 		spr.img = IntRect{ font.img_x, font.img_y, font.char_w, font.char_h };
 		spr.color = color;
 
@@ -22,7 +22,7 @@ namespace yks {
 			spr.img.x = font.img_x + grid_col * font.char_w;
 			spr.img.y = font.img_y + grid_line * font.char_h;
 			buffer.append(spr);
-			spr.mat.transform(mvec2(font.char_w, 0).typecast<float>());
+			spr.mat.translate(mvec2(font.char_w, 0).typecast<float>());
 		}
 	}
 
